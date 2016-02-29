@@ -1,0 +1,884 @@
+@CHARSET "UTF-8";
+
+/* C S S   S T Y L E  */
+
+/* definiciones globales */
+html {
+	font-family: "Helvetica Neue", /*"Helvetica",*/ 
+               "Verdana", "Nimbus Sans L", "Nimbus Sans", "Arial",
+		"Lucida Grande", "Lucida Sans", "Luxi Sans", "Tahoma", sans,
+		sans-serif;
+	font-size: 12pt;
+	margin: 1em;
+	margin-bottom: 2em;
+	padding: 0;
+	width: 90%
+}
+
+body {
+	background-color: #EBE8D9;
+	color: #000000;
+	margin: 1em;
+	padding: 1em;
+	width: 100%;
+	text-align: left;
+}
+
+hr {
+	margin: 1em;
+	padding: 0em;
+	width: 100%;
+}
+
+/* Encabezamientos y p�rrafos */
+h1 {
+	font-size: 175%;
+}
+
+h2 {
+	font-size: 150%;
+}
+
+h3 {
+	font-size: 125%;
+}
+
+p {
+	font-size: 125%;
+	text-align: justify;
+}
+
+/* Links definition */
+a,a:link,a:visited,a:hover {
+	color: #395BED;
+	text-decoration: none;
+}
+
+/* select */
+select {
+	font-size: 125%;
+}
+
+/* input */
+input {
+	font-size: 125%;
+}
+
+input [type='range'] {
+	/* -webkit-appearance: none !important; */
+	background: red;
+	height: 20px;
+	width: 50em;
+}
+
+/* DESCRIPTION LISTS */
+dl {
+	padding-top: 0em;
+	text-align: justify;
+}
+
+dt {
+	text-indent: 0em;
+	font-weight: 700;
+}
+
+dd {
+	text-indent: -0em;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+}
+
+/* Ejemplo de c�digo fuente. */
+pre {
+	font-family: Courier, "Courier New", monospace;
+	background-color: #f3faf4;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 10px;
+	border: 1px #d8d8d8 solid;
+}
+
+table {
+	border: 1px solid #000000;
+	/*border-collapse:collapse;*/
+}
+
+table.withoutBorder {
+	border: none;
+	border-style: hidden;
+	border-width: 0px;
+	border-collapse: collapse;
+}
+
+th.withoutBorder,td.withoutBorder,tr.withoutBorder {
+	border: none;
+	margin: 1px;
+	padding: 0.5em;
+	/* border-collapse:collapse; */
+	border-style: hidden;
+	/* border-color:transparent; */
+	border-width: 0px;
+	/* color:white; */
+	vertical-align: middle;
+	text-align: center;
+}
+
+div {
+	margin: 0px;
+	padding: 0px;
+}
+
+/*-----------------------------------------------*/
+.underline {
+	text-decoration: underline;
+}
+
+.center {
+	text-align: center;
+}
+
+.indexPageTitle {
+	font-size: 250%;
+	text-align: center;
+}
+
+.indexPageTitleExplanation {
+	font-size: 200%;
+	text-align: center;
+}
+
+.indexPageImportantLink,a.indexPageImportantLink,a.indexPageImportantLink:link,a.indexPageImportantLink:visited,a.indexPageImportantLink:hover
+	{
+	color: red;
+	/* text-color: red; */
+	font-size: 125%;
+	text-align: center;
+}
+
+.indexPageSubTitle {
+	text-decoration: underline;
+	font-size: 175%;
+	margin: 0.5em;
+}
+
+.indexPageText {
+	font-size: 125%;
+}
+
+#HeaderLogo {
+	position: relative;
+	top: 16px;
+	left: 5px;
+	float: left;
+}
+
+.babelimg {
+	position: relative;
+	top: 5px;
+	margin: 0px;
+	padding: 0px;
+	height: 40px;
+	border: #FB6D1D solid 1px;
+	float: left;
+}
+
+.bodyHeadTable {
+	border: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	display: table;
+}
+
+#bodyHeadTitle {
+	width: 60%;
+	height: 1.5em;
+	padding: 1em;
+	font-size: 200%;
+	display: table-cell;
+	margin: 0;
+}
+
+#bodyHeadLogged {
+	width: 30%;
+	font-size: 125%;
+	padding: 0.5em;
+	display: table-cell;
+}
+
+#bodyHeadLogout {
+	width: 10%;
+	font-size: 125%;
+	padding: 0.5em;
+	display: table-cell;
+}
+
+.tableWithBorderWidth50 {
+	display: table;
+	border: 0.2em solid black;
+	width: 50%;
+	text-align: center;
+}
+
+.tableHeadWithBorderWidth50 {
+	display: table-caption;
+	border: 0.1em solid black;
+	width: 50%;
+}
+
+.tableHeadWithBorderWidth100 {
+	display: table-caption;
+	border: 0.1em solid black;
+	width: 100%;
+}
+
+.tableRowWithBorderWidth100 {
+	display: table-row;
+	border: 0.1em solid grey;
+	width: 100%;
+}
+
+.tableCellWithBorderWidth50 {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 50%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.tableCellWithBorderWidth100 {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.tableHeadWithOutBorderWidth100 {
+	display: table-caption;
+	border: none;
+	width: 100%;
+	font-size: 125%;
+	margin: 0.2em;
+}
+
+.fuzzificationDefsTable {
+	display: table;
+	border: 0.1em solid #000000;
+	width: 90%;
+	margin: 1em;
+	text-align: center;
+}
+
+.fuzzificationDefsTableCaption {
+	display: table-caption;
+	border: none;
+	width: 90%;
+	padding: 0.2em;
+	font-size: 125%;
+}
+
+.fuzzificationDefsTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	width: 100%;
+}
+
+.fuzzificationDefsTableCell {
+	display: table-cell;
+	border: 0.1em solid #000000;
+	width: 20%;
+	text-align: center;
+}
+
+.fuzzificationDefsTableCell1 {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 25%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.fuzzificationDefsTableCell2 {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 5%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.fuzzificationDefsTableCell3 {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 70%;
+	height: 20em;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.fuzzificationDefsTableCellForGraphic {
+	display: table-cell;
+	border: 0.1em solid #000000;
+	width: 60%;
+}
+
+.fuzzificationBarsTable {
+	display: table;
+	border: 0.1em solid #000000;
+	width: 90%;
+	margin: 1em;
+	text-align: center;
+}
+
+.fuzzificationBarsTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	width: 70%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.fuzzificationBarsTableCell {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 70%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.fuzzificationFunctionPointBarTitle {
+	display: block;
+	font-size: 150%;
+	text-align: center;
+}
+
+.filesListTable {
+	display: table;
+	border: 0.1em solid #000000;
+	margin: 1em;
+	text-align: center;
+}
+
+.filesListTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.filesListTableCell {
+	display: table-cell;
+	border: 0.1em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.filesListTable {
+	display: table;
+	border: 0.1em solid #000000;
+	margin: 1em;
+	text-align: center;
+}
+
+.filesListTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.filesListTableCell {
+	display: table-cell;
+	border: 0.1em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.fileViewTableCell {
+	display: table-cell;
+	border: 0em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.userInformationTable {
+	display: table;
+	border: 0.1em solid #000000;
+	margin: 1em;
+	text-align: center;
+}
+
+.userInformationTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.userInformationTableCell {
+	display: table-cell;
+	border: 0.1em solid grey;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.defaultTable {
+	display: table;
+	border: none;
+	margin: 1em;
+	width: 90%;
+	text-align: center;
+}
+
+.defaultTableRow {
+	display: table-row;
+	border: none;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.defaultTableCell1 {
+	display: table-cell;
+	border: none;
+	width: 25%;
+	text-align: left;
+}
+
+.defaultTableCell2 {
+	display: table-cell;
+	border: none;
+	width: 70%;
+	text-align: left;
+}
+
+.defaultTableCell3 {
+	display: table-cell;
+	border: none;
+	width: 5%;
+	text-align: left;
+}
+
+.selectDatabaseTable {
+	display: table;
+	border: none;
+	margin: 1em;
+	text-align: center;
+}
+
+.selectDatabaseTableRow {
+	display: table-row;
+	border: none;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.selectDatabaseTableCell1 {
+	display: table-cell;
+	border: none;
+	padding-right: 3em;
+	text-align: left;
+}
+
+.selectDatabaseTableCell2 {
+	display: table-cell;
+	border: none;
+	padding-right: 3em;
+	text-align: left;
+}
+
+.selectDatabaseTableCell3 {
+	display: table-cell;
+	border: none;
+	padding-right: 3em;
+	text-align: left;
+}
+
+.searchOrPersonalizeTable {
+	display: table;
+	border: none;
+	margin: 1em;
+	text-align: center;
+}
+
+.searchOrPersonalizeTableRow {
+	display: table-row;
+	border: none;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.searchOrPersonalizeTableCell {
+	display: table-cell;
+	border: none;
+	text-align: center;
+	white-space: nowrap;
+	padding: 0.1em;
+}
+
+.personalizationDivMainTable {
+	display: table;
+	border: none;
+	width: 100%;
+	margin: 1em;
+	text-align: center;
+}
+
+.personalizationDivMainTableRow {
+	display: table-row;
+	border: none;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.personalizationDivMainTableCell {
+	display: table-cell;
+	border: none;
+	width: 100%;
+	text-align: center;
+	padding: 0.1em;
+}
+
+.personalizationDivSelectFuzzificationTable {
+	display: table;
+	border: none;
+	margin: 1em;
+	text-align: center;
+}
+
+.personalizationDivSelectFuzzificationTableRow {
+	display: table-row;
+	border: none;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.personalizationDivSelectFuzzificationTableCell {
+	display: table-cell;
+	border: none;
+	text-align: center;
+	padding: 0.1em;
+}
+
+.personalizationDivFuzzificationFunctionWithButtonTable {
+	display: table;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionWithButtonTableRow {
+	display: table-row;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionWithButtonTableCell {
+	display: table-cell;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionTable {
+	display: table;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionTableRow {
+	display: table-row;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionTableCell1 {
+	display: table-cell;
+	border: none;
+	width: 30%;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionTableCell2 {
+	display: table-cell;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivFuzzificationFunctionValuesTable {
+	display: table;
+	border: 0.05em solid #000000;
+	margin: 1em;
+	text-align: center;
+}
+
+.personalizationDivFuzzificationFunctionValuesTableRow {
+	display: table-row;
+	border: 0.05em solid #000000;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.personalizationDivFuzzificationFunctionValuesTableCell {
+	display: table-cell;
+	border: 0.05em solid #000000;
+	text-align: center;
+	padding: 0.3em;
+}
+
+.personalizationDivSaveButtonAndMsgTable {
+	display: table;
+	border: none;
+	text-align: center;
+	margin: 1em;
+	padding: 0em;
+}
+
+.personalizationDivSaveButtonAndMsgTableRow {
+	display: table-row;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.personalizationDivSaveButtonAndMsgTableCell {
+	display: table-cell;
+	border: none;
+	text-align: center;
+	margin: 0em;
+	padding: 0em;
+}
+
+.queryStartContainerTable {
+	display: table;
+	border: none;
+	width: 90%;
+	margin: 1em;
+	text-align: center;
+}
+
+.queryStartContainerTableRow {
+	display: table-row;
+	border: none;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryStartContainerTableCell1 {
+	display: table-cell;
+	border: none;
+	width: 20%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryStartContainerTableCell2 {
+	display: table-cell;
+	border: none;
+	width: 80%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryLinesContainerTable {
+	display: table;
+	border: none;
+	width: 100%;
+	margin: 1em;
+	text-align: center;
+}
+
+.queryLinesContainerTableRow {
+	display: table-row;
+	border: none;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryLinesContainerTableCell {
+	display: table-cell;
+	border: none;
+	text-align: left;
+	padding: 0.1em;
+}
+/* width:70%; */
+.queryLinesTable {
+	display: table;
+	border: none;
+	width: 100%;
+	margin: 1em;
+	text-align: center;
+}
+
+.queryLinesTableRow {
+	display: table-row;
+	border: none;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryLinesTableCell {
+	display: table-cell;
+	border: none;
+	text-align: left;
+	white-space: nowrap;
+	padding: 0.1em;
+}
+/* width:100%; */
+.queryLinesAggregatorTable {
+	display: table;
+	border: none;
+	width: 100%;
+	margin: 1em;
+	text-align: center;
+}
+
+.queryLinesAggregatorTableRow {
+	display: table-row;
+	border: none;
+	width: 100%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryLinesAggregatorTableCell {
+	display: table-cell;
+	border: none;
+	width: 100%;
+	text-align: center;
+	padding: 0.1em;
+}
+
+.queryAnswersTable {
+	display: table;
+	border: 0.1em solid #000000;
+	width: 90%;
+	margin: 1em;
+	text-align: center;
+}
+
+.queryAnswersTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	width: 70%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.queryAnswersTableCell {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 70%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.debugTable {
+	display: table;
+	border: 0.1em solid #000000;
+	width: 90%;
+	margin: 1em;
+	text-align: center;
+}
+
+.debugTableRow {
+	display: table-row;
+	border: 0.1em solid grey;
+	width: 70%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+.debugTableCell {
+	display: table-cell;
+	border: 0.1em solid grey;
+	width: 70%;
+	text-align: left;
+	padding: 0.1em;
+}
+
+td.providersIcons {
+	border: 1em;
+	padding: 1em;
+}
+
+td.programFileChosen {
+	border: 0.1em solid #cccccc;
+	margin: 0.2em;
+	padding: 0.2em;
+}
+
+li.bodyToUserMsgs {
+	color: red;
+}
+
+table.fileViewTable {
+	padding: 1em;
+	width: 100%;
+}
+
+table.programFilesTable,td.programFilesTable {
+	border: 0.1em solid #000000;
+	border-color: black;
+	padding: 0.4em;
+	margin: 0.2em;
+	text-align: center;
+}
+
+th.programFileChosen,td.programFileChosen {
+	padding: 0.5em;
+}
+
+th.queryLineAggregatorTable,td.queryLineAggregatorTable {
+	text-align: center;
+}
+
+table.queryResults {
+	border: 0.1em solid #000000;
+}
+
+tr.queryResults,th.queryResults,td.queryResults {
+	border: 0.1em solid #000000;
+	border-color: black;
+	padding: 0.6em;
+	margin: 0.2em;
+	text-align: center;
+}
+
+div#qTip {
+	padding: 3px;
+	border: 1px solid #666;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	display: none;
+	background: #999;
+	color: #FFF;
+	font: bold 9px Verdana, Arial, sans-serif;
+	text-align: left;
+	position: absolute;
+	z-index: 1000;
+}
+
+.rotate {
+	rotation-point: 50% 50%;
+	rotation: 180deg;
+}
