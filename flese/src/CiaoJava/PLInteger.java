@@ -1,17 +1,17 @@
 package CiaoJava;
 
+/* TODO: Allow BigInteger? */
+
 /**
  * Prolog integer representation.
  * This implementation can only work with Prolog integers
- * that fit in Java <code>Integer</code> type. The <code>Long</code>
- * representation cannot be used due to the importance of integer
- * numbers for almost every class in the Java API.
+ * that fit in Java <code>Long</code> type.
  */
 public class PLInteger extends PLTerm {
   /**
    * Value of the Prolog integer.
    */
-  private Integer Value;
+  private Long Value;
 
   /**
    * Integer constructor. Creates a new <code>PLInteger</code> object
@@ -21,10 +21,10 @@ public class PLInteger extends PLTerm {
    *        This argument must be the largest representation of an
    *        integral number to manage Prolog integers.
    */
-  public PLInteger(int v) {
+  public PLInteger(long v) {
 
     Type = PLTerm.INTEGER;
-    Value = new Integer(v);
+    Value = new Long(v);
 
   }
 
@@ -42,7 +42,7 @@ public class PLInteger extends PLTerm {
 
   /**
    * Gets the Java representation of this Prolog integer as an object.
-   * The object returned must be a Java <code>Integer</code> object.
+   * The object returned must be a Java <code>Long</code> object.
    *
    * @param i <code>PLInterpreter</code> object to interpret the
    *          this Prolog term (although is not needed in this
@@ -50,7 +50,7 @@ public class PLInteger extends PLTerm {
    *          the abstract declaration in <code>PLTerm</code>).
    *
    * @return  An <code>Object</code> representing the Prolog integer.
-   *          This object will be a Java <code>Integer</code> object.
+   *          This object will be a Java <code>Long</code> object.
    */
   public Object javaRepr(PLInterpreter i) {
 
@@ -60,10 +60,10 @@ public class PLInteger extends PLTerm {
 
   /**
    * Gets the Java representation of this Prolog integer as an object.
-   * The object returned will be a Java <code>Integer</code> object.
+   * The object returned will be a Java <code>Long</code> object.
    *
    * @return  An <code>Object</code> representing the Prolog integer.
-   *          This object will be a Java <code>Integer</code> object.
+   *          This object will be a Java <code>Long</code> object.
    */
   public Object javaRepr() {
       return (Object)Value;
@@ -72,11 +72,11 @@ public class PLInteger extends PLTerm {
   /**
    * Gets the integer value of the <code>PLInteger</code> object.
    *
-   * @return The primitive <code>int</code> value of this Prolog integer.
+   * @return The primitive <code>long</code> value of this Prolog integer.
    */
-  public int getValue() {
+  public long getValue() {
 
-    return Value.intValue();
+    return Value.longValue();
 
     }
 

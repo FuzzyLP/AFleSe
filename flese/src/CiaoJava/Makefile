@@ -1,6 +1,6 @@
-# TODO: Port this Makefile to Prolog
-CIAOBUILDDIRtemp=../../../../build
--include $(CIAOBUILDDIRtemp)/CONFIG_mkf
+# TODO: Use ciao_builder instead
+
+CIAOCMD ?= ciao
 
 JAVASOURCES=*.java
 JAVACLASSES=*.class
@@ -11,16 +11,10 @@ all: classes
 
 classes:
 	-$(JAVAC) $(JAVAFLAGS) $(JAVASOURCES)
-	-chmod $(DATAMODE) $(JAVACLASSES)
 
 clean realclean:
 	/bin/rm -f $(JAVACLASSES)
-	/bin/rm -f *.itf *.po *.dep *.asr
+	if [ -x $(CIAOCMD) ]; then $(CIAOCMD) clean_tree "."; fi
 
 distclean: realclean
 	/bin/rm -f *~ *.class
-
-tags:
-	-etags -l java $(JAVASOURCES)
-
-

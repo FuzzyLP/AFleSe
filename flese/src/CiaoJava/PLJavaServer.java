@@ -67,8 +67,7 @@ public class PLJavaServer {
 	    if (server) {
 		System.err.println("Java Server started.");
 		while (true) {
-		    @SuppressWarnings("unused")
-			PLConnection pl = new PLConnection(ss);
+		    PLConnection pl = new PLConnection(ss);
 		}
 	    } else {
 		PLConnection pl = new PLConnection(ss);

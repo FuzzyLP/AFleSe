@@ -321,7 +321,6 @@ public class PLConnection {
 	pjReader = new PLSocketReader(pjIn, pjWriter);
 
 	// Synchronizing prolog-to-java socket.
-	@SuppressWarnings("unused")
 	PLTerm pjSync = fromPrologPJ();
 	//if (!pjSync.equals(PJ_SYNC)) throw...
 	toPrologPJ(ID_INTERFACE,PJ_SYNC);
@@ -344,7 +343,6 @@ public class PLConnection {
 	jpReader = new PLMultithreadSocketReader(jpIn,jpWriter);
 
 	// Synchronizing java-to-prolog socket.
-	@SuppressWarnings("unused")
 	PLTerm jpSync = fromPrologJP(ID_INTERFACE);
 	//if (!jpSync.equals(JP_SYNC)) throw...
 	toPrologJP(ID_INTERFACE,JP_SYNC);
@@ -379,7 +377,6 @@ public class PLConnection {
 	// Synchronizing prolog-to-java socket.
 	toPrologPJ(ID_INTERFACE,PJ_SYNC);
 	//if (!pjSync.equals(PJ_SYNC)) throw...
-	@SuppressWarnings("unused")
 	PLTerm pjSync = fromPrologPJ();
 
 	// Starting java-to-prolog socket.
@@ -402,7 +399,6 @@ public class PLConnection {
 	// Synchronizing java-to-prolog socket.
 	toPrologJP(ID_INTERFACE,JP_SYNC);
 	//if (!jpSync.equals(JP_SYNC)) throw...
-	@SuppressWarnings("unused")
 	PLTerm jpSync = fromPrologJP(ID_INTERFACE);
 
 	// Creating Java object server.

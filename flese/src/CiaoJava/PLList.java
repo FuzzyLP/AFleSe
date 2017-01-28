@@ -119,7 +119,7 @@ public class PLList extends PLTerm {
      *          <code>Object</code> array.
      */
     public Object javaRepr(PLInterpreter i) {
-	Vector<Object> v = new Vector<Object>(START_CAPACITY, INCREMENT);
+	Vector v = new Vector(START_CAPACITY, INCREMENT);
 	Object[] a;
 	PLTerm t;
 

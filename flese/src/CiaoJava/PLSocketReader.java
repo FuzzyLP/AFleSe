@@ -37,7 +37,7 @@ class PLSocketReader extends Thread {
     /**
      * List of messages received but with no requests waiting for them.
      */
-    private Vector<PLTerm> msgQueue;
+    private Vector msgQueue;
 
     /**
      * Handler constructor. Starts a new handler thread reading at the
@@ -49,7 +49,7 @@ class PLSocketReader extends Thread {
 	//	super("PLSocketReader");
 	this.in = in;
 	this.writer = writer;
-	msgQueue = new Vector<PLTerm>(STARTING_CAPACITY,INCREMENT);
+	msgQueue = new Vector(STARTING_CAPACITY,INCREMENT);
 	this.start();
     }
 
@@ -122,7 +122,7 @@ class PLSocketReader extends Thread {
     /**
      * Clears all the messages stored on the buffer.
      */
-    @SuppressWarnings("unused") private synchronized void clear() {
+    private synchronized void clear() {
 	msgQueue.clear();
     }
 }

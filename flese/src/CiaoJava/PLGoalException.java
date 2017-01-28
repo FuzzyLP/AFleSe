@@ -6,7 +6,7 @@ package CiaoJava;
  * process.
  */
 public class PLGoalException extends PLException {
-	private static final long serialVersionUID = 1L;
+
   /**
    * Creates a new <code/>PLGoalException</code>
    * with no description.

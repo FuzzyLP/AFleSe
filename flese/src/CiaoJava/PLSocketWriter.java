@@ -30,7 +30,7 @@ class PLSocketWriter extends Thread {
      * Queue of messages posted by other Java threads, waiting to be 
      * sent to the Prolog side.
      */
-    private Vector<PLTerm> msgQueue;
+    private Vector msgQueue;
 
     /**
      * Handler constructor. Starts a new handler thread writing 
@@ -42,7 +42,7 @@ class PLSocketWriter extends Thread {
     public PLSocketWriter(PrintWriter out) {
 	//	super("PLSocketWriter");
 	this.out = out;
-	msgQueue = new Vector<PLTerm>(STARTING_CAPACITY, INCREMENT);
+	msgQueue = new Vector(STARTING_CAPACITY, INCREMENT);
 	this.start();
     }
 
@@ -116,7 +116,7 @@ class PLSocketWriter extends Thread {
     /**
      * Clears the internal data structures.
      */
-    @SuppressWarnings("unused") private synchronized void clear() {
+    private synchronized void clear() {
 	msgQueue.clear();
     }
 }

@@ -17,6 +17,7 @@ public class PathsMgmt {
 
 	private static String programFilesPath = null;
 	private static String plServerPath = null;
+	private static String ciaocPath = null;
 
 	public PathsMgmt() throws FilesAndPathsException {
 		if (programFilesPath == null) {
@@ -24,19 +25,17 @@ public class PathsMgmt {
 			setProgramFilesPath(tmpProgramFilesPath);
 			LOG.info("programFilesPath: " + programFilesPath);
 		}
-
-		if (plServerPath == null) {
-			String tmpPlServerPath = determinePlServerValidPath(KConstants.PathsMgmt.plServerValidSubPaths);
-			setPlServerPath(tmpPlServerPath);
-			LOG.info("plServerPath: " + plServerPath);
-		}
-
 		if (programFilesPath == null) {
 			throw new FilesAndPathsException("programFilesPath cannot be null.");
 		}
 
+		plServerPath = KConstants.PathsMgmt.plServerPath;
 		if (plServerPath == null) {
 			throw new FilesAndPathsException("plServerPath cannot be null.");
+		}
+		ciaocPath = KConstants.PathsMgmt.ciaocPath;
+		if (ciaocPath == null) {
+			throw new FilesAndPathsException("ciaocPath cannot be null.");
 		}
 	}
 
@@ -52,15 +51,15 @@ public class PathsMgmt {
 		return plServerPath;
 	}
 
+	public String getCiaocPath() throws FilesAndPathsException {
+		if (ciaocPath == null)
+			throw new FilesAndPathsException("ciaocPath cannot be null.");
+		return ciaocPath;
+	}
+
 	private synchronized void setProgramFilesPath(String tmpProgramFilesPath) throws FilesAndPathsException {
 		if (programFilesPath == null) {
 			programFilesPath = tmpProgramFilesPath;
-		}
-	}
-
-	private synchronized void setPlServerPath(String tmpPlServerPath) throws FilesAndPathsException {
-		if (plServerPath == null) {
-			plServerPath = tmpPlServerPath;
 		}
 	}
 
@@ -99,73 +98,6 @@ public class PathsMgmt {
 
 		LOG.info("determineProgramFilesValidPath: ok: " + programFilesValidPath);
 		return programFilesValidPath;
-	}
-
-	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Looks which one of the proposed subPaths for the plServer is the correct
-	 * one.
-	 * 
-	 * @param plServerValidSubPaths
-	 *            are the new proposed subpaths for the plServer.
-	 * @throws FilesAndPathsException
-	 *             when none is valid.
-	 * 
-	 */
-	private String determinePlServerValidPath(String[] plServerValidSubPaths) throws FilesAndPathsException {
-		String plServerPath = null;
-		int index = 0;
-
-		while (((plServerPath == null) || ("".equals(plServerPath))) && (index < plServerValidSubPaths.length)) {
-			LOG.info(plServerValidSubPaths[index]);
-
-			plServerPath = lookForPlServerFileInSubDir(plServerValidSubPaths[index]);
-
-			if (plServerPath == null)
-				index++;
-		}
-
-		if (plServerPath == null) {
-			throw new FilesAndPathsException("plServerPath cannot be null.");
-		}
-		return plServerPath;
-	}
-
-	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	private String lookForPlServerFileInSubDir(String subPath) {
-		String result = null;
-
-		if (subPath != null) {
-			File file = new File(subPath);
-
-			if ((file.exists()) && (file.canRead()) || (file.canExecute())) {
-				if (file.isFile()) {
-					if (KConstants.PathsMgmt.plServerProgramFileName.equals(file.getName())) {
-						result = subPath;
-					}
-				} else {
-					if (file.isDirectory()) {
-						File[] subFiles = file.listFiles();
-						int index = 0;
-						while ((result == null) && (index < subFiles.length)) {
-							result = lookForPlServerFileInSubDir(subFiles[index].getAbsolutePath());
-							
-						}
-					} else {
-						LOG.info("Impossible to process path (not a file nor a directory): " + subPath);
-					}
-				}
-			} else {
-				LOG.info("Impossible to process path (not exists, not readable or not executable): " + subPath);
-			}
-		}
-		return result;
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////

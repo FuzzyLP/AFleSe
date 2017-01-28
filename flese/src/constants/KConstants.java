@@ -77,8 +77,8 @@ public class KConstants {
 
 	public static class PathsMgmt {
 		public static String[] programFilesValidPaths = new String[5];
-		public static String[] plServerValidSubPaths = new String[2];
-		public static String plServerProgramFileName = "";
+		public static String plServerPath = "";
+		public static String ciaocPath = "";
 		public static boolean stateErrorConfigFile = false;
 		public static boolean stateErrorConfigFile2 = false;
 		public static String reasonError2 = "";
@@ -103,9 +103,8 @@ public class KConstants {
 			programFilesValidPaths[3] = (prop.getProperty("programFilesValidPaths3"));
 			programFilesValidPaths[4] = (prop.getProperty("programFilesValidPaths4"));
 			
-			plServerValidSubPaths[0] = prop.getProperty("plServerValidSubPaths");
-			plServerValidSubPaths[1] = prop.getProperty("plServerValidSubPaths2");
-			plServerProgramFileName = prop.getProperty("plServerProgramFileName");
+			plServerPath = prop.getProperty("plServerPath");
+			ciaocPath = prop.getProperty("ciaocPath");
 	 
 		} catch (IOException ex) {
 			ex.printStackTrace();

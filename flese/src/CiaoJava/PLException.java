@@ -6,7 +6,7 @@ package CiaoJava;
  * received from the Prolog side.
  */
 public class PLException extends Exception {
-	private static final long serialVersionUID = 1L;
+
   /**
    * Creates a new <code/>PLException</code>
    * with no description.

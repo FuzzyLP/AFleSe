@@ -28,8 +28,7 @@ public class PLGoal {
   private PLTerm goalId = null;
   private int status = NOT_LAUNCHED;
 
-  @SuppressWarnings("unused")
-private static final String FAIL = "prolog_fail";
+  private static final String FAIL = "prolog_fail";
   private static final String IS_RUNNING = "prolog_is_running";
   private static final String LAUNCH_GOAL = "prolog_launch_query";
   private static final String NEXT_SOLUTION = "prolog_next_solution";

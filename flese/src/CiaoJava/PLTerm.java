@@ -74,14 +74,11 @@ public abstract class PLTerm extends Object {
    * fastRead/fastWrite fields constants.
    */
   private static String AtomTable[] = {};
-  @SuppressWarnings("unused")
-private static int VarNumber = 0;
-  @SuppressWarnings("unused")
-private static int VarCounter = 0;
+  private static int VarNumber = 0;
+  private static int VarCounter = 0;
 
   private static final int STRING_BUFFER_SIZE = 20;
-  @SuppressWarnings("unused")
-private static final int MAX_READ_BUFFER = 512;
+  private static final int MAX_READ_BUFFER = 512;
 
   /*
    * Constants for fast_read/fast_write version 'a'.
@@ -123,7 +120,7 @@ private static final int MAX_READ_BUFFER = 512;
    * and as value the sequential variable number. This variable is
    * absolutely private, and is cleanst every time this term is 'fastWritten.'
    */
-  private Hashtable<Object, Integer> varTable = null;
+  private Hashtable varTable = null;
 
   /****************************************************/
   /* Abstract or overlapped methods                   */
@@ -138,7 +135,7 @@ private static final int MAX_READ_BUFFER = 512;
 
   /**
    * Java representation of the Prolog term.
-   * Is used to obtain the equivalent Java object.
+   * It is used to obtain the equivalent Java object.
    * 
    * @param i <code>PLInterpreter</code> object used
    *          to interpret the Prolog representation
@@ -499,10 +496,8 @@ private static final int MAX_READ_BUFFER = 512;
    * @param in Reader from which the term will be read.
    */
   private static void getPrefix(BufferedReader in) throws PLException {
-    @SuppressWarnings("unused")
-	int NumberOfAtoms;
-    @SuppressWarnings("unused")
-	int NumberOfCells;
+    int NumberOfAtoms;
+    int NumberOfCells;
 
     switch (currentVersion) {
     case VERSION_A:
@@ -547,6 +542,33 @@ private static final int MAX_READ_BUFFER = 512;
     }
     catch (NumberFormatException e) {
       throw new PLException("Cannot parse int (" + number + ")");
+    }
+    return value;
+  }
+
+  /**
+   * Gets a long from the buffer until '\0' is found.
+   *
+   * @param  in Reader from which the term will be read.
+   *
+   * @return    The long read.
+   *
+   * @exception <code>PLException</code> if the long
+   *            received is not a valid Java long.
+   */
+  private static long getLong(BufferedReader in) throws PLException {
+    long value = 0;
+    String number = "";
+    char c;
+
+    while ((c = getChar(in)) != '\0')
+      number = number + String.valueOf(c);
+
+    try {
+      value = Long.valueOf(number).longValue();
+    }
+    catch (NumberFormatException e) {
+      throw new PLException("Cannot parse long (" + number + ")");
     }
     return value;
   }
@@ -664,10 +686,10 @@ private static final int MAX_READ_BUFFER = 512;
         return list;
         
       case PFX_SHORT_INT:
-        return new PLInteger(getInt(in));
+	return new PLInteger((long)getInt(in));
         
       case PFX_LONG_INT:
-        return new PLInteger(getInt(in));
+        return new PLInteger(getLong(in));
         
       case PFX_FLOAT:
         return new PLFloat(getFloat(in));
@@ -727,7 +749,7 @@ private static final int MAX_READ_BUFFER = 512;
 	}
 
       case PFXC_INTEGER:
-        return new PLInteger(getInt(in));
+        return new PLInteger(getLong(in));
         
       case PFXC_FLOAT:
         return new PLFloat(getFloat(in));
@@ -768,10 +790,9 @@ private static final int MAX_READ_BUFFER = 512;
     /*
      * Private variable Hashtable is initialized.
      */
-    varTable = new Hashtable<Object, Integer>();
+    varTable = new Hashtable();
 
-    @SuppressWarnings("unused")
-	int NumberOfAtoms;
+    int NumberOfAtoms;
 
     // Prefix.
     s.append(genPrefix(this));

@@ -11,9 +11,8 @@ import java.util.*;
  * look up the Java objects referred by the Prolog side.
  */
 class PLInterpreter {
-    private Hashtable<Integer, Object> objTable;
-    @SuppressWarnings("unused")
-	private int objKey = 0;
+    private Hashtable objTable;
+    private int objKey = 0;
     private static final int STARTING_CAPACITY = 16;
     private static final float FACTOR = 0.2f;
     //  private PLActionListener javaActionListener;
@@ -29,8 +28,7 @@ class PLInterpreter {
     private static final String REMOVE_LISTENER = "$java_remove_listener";
     private static final String TERMINATE = "$terminate";
     private static final String DISCONNECT = "$disconnect";
-    @SuppressWarnings("unused")
-	private static final String WAIT_FOR_EVENTS = "$java_wait_for_events";
+    private static final String WAIT_FOR_EVENTS = "$java_wait_for_events";
 
     /**
      * Creates a new interpreter, with the table of objects
@@ -39,7 +37,7 @@ class PLInterpreter {
      * @param pl Object that represents the connection to the Prolog process.
     */
     public PLInterpreter(PLConnection pl) {
-	objTable = new Hashtable<Integer, Object>(STARTING_CAPACITY, FACTOR);
+	objTable = new Hashtable(STARTING_CAPACITY, FACTOR);
 	eventListener = new PLEventListener(pl, this);
     }
 
@@ -161,7 +159,7 @@ class PLInterpreter {
       return PLTerm.javaException("java_get_value: Field name reference");
     }
 
-    Class<?> cl = null;
+    Class cl = null;
     Object obj = null;
     if (st.Args[0].Type == PLTerm.ATOM) {
       // Static field. Java object will be null, and the 
@@ -230,7 +228,7 @@ class PLInterpreter {
     
     // Field value change.
     try {
-      Class<?> cl = obj.getClass();
+      Class cl = obj.getClass();
       Field fl = cl.getField((String)st.Args[1].javaRepr(this));
       fl.set(obj,val);
       return PLAtom.success;
@@ -266,7 +264,7 @@ class PLInterpreter {
     }
     
     // Object deletion.
-    Integer obj = (Integer)str.Args[0].javaRepr(this);
+    Integer obj = ((Long)str.Args[0].javaRepr(this)).intValue();
     Object value = null;
     try {
       value = objTable.remove(obj);
@@ -305,7 +303,7 @@ class PLInterpreter {
     }
     
     // Class creation.
-    Class<?> cl = null;
+    Class cl = null;
     try {
       cl = Class.forName(st.Args[0].toString());
     } catch(Exception e) {
@@ -322,7 +320,7 @@ class PLInterpreter {
         Class[] clsarg = new Class[objarg.length];
         for (int i = 0; i < clsarg.length; i++)
           clsarg[i] = objarg[i].getClass();
-        Constructor<?> cn = getConstructor(cl, (Class[])clsarg);
+        Constructor cn = getConstructor(cl, (Class[])clsarg);
         newobj = cn.newInstance(objarg);
         objTable.put(new Integer(newobj.hashCode()),newobj);
 
@@ -336,14 +334,14 @@ class PLInterpreter {
 	  objarg[i] = (Object)(new Integer(arg[i]));
 	  clsarg[i] = Integer.TYPE;
 	}
-        Constructor<?> cn = getConstructor(cl, (Class[])clsarg);
+        Constructor cn = getConstructor(cl, (Class[])clsarg);
         newobj = cn.newInstance(objarg);
         objTable.put(new Integer(newobj.hashCode()),newobj);
 
       } else {
         Object objarg[] = {};
-        Class<?> clsarg[] = {};
-        Constructor<?> cn = getConstructor(cl, (Class[])(clsarg));
+        Class clsarg[] = {};
+        Constructor cn = getConstructor(cl, (Class[])(clsarg));
         newobj = cn.newInstance(objarg);
         objTable.put(new Integer(newobj.hashCode()),newobj);
       }
@@ -386,7 +384,7 @@ class PLInterpreter {
 	return PLTerm.javaException("java_invoke_method: no list argument");
     }
 
-    Class<?> cl = null;
+    Class cl = null;
     Object obj = null;
     if (st.Args[0].Type == PLTerm.ATOM) {
       // Static method invocation. Java object will be null, and the 
@@ -418,7 +416,7 @@ class PLInterpreter {
       if (st.Args[2].isList()) {
         PLList arg = (PLList)st.Args[2];
         Object[] objarg = (Object[])arg.javaRepr(this);
-        Class<?> clsarg[] = new Class[objarg.length];
+        Class clsarg[] = new Class[objarg.length];
         for (int i = 0; i < clsarg.length; i++)
           clsarg[i] = objarg[i].getClass();
         Method mt = getMethod(cl, mtName, clsarg);
@@ -438,7 +436,7 @@ class PLInterpreter {
 	result = invoke(mt, obj, objarg);
 
       } else {
-        Class<?> clsarg[] = {};
+        Class clsarg[] = {};
         Method mt = cl.getMethod(mtName, clsarg);
         result = mt.invoke(obj, new Object[0]);
       }
@@ -488,7 +486,7 @@ class PLInterpreter {
 	return PLTerm.javaException("java_add_listener: event class");
     }
 
-    Class<?> event = null;
+    Class event = null;
     try {
       event = Class.forName(st.Args[1].toString());
     } catch(Exception e) {
@@ -535,7 +533,7 @@ class PLInterpreter {
 	return PLTerm.javaException("java_remove_listener: event class");
     }
 
-    Class<?> event = null;
+    Class event = null;
     try {
       event = Class.forName(st.Args[1].toString());
     } catch(Exception e) {
@@ -582,16 +580,16 @@ class PLInterpreter {
     }
 
     if (v instanceof Integer)
-      return new PLInteger(((Integer)v).intValue());
+      return new PLInteger(((Integer)v).longValue());
     
     if (v instanceof Short)
-      return new PLInteger(((Short)v).intValue());
+      return new PLInteger(((Short)v).longValue());
 
     if (v instanceof Long)
-      return new PLInteger(((Long)v).intValue());
+      return new PLInteger(((Long)v).longValue());
 
     if (v instanceof Byte)
-      return new PLInteger(((Byte)v).intValue());
+      return new PLInteger(((Byte)v).longValue());
 
     if (v instanceof String)
       return new PLString(((String)v).toString());
@@ -667,7 +665,7 @@ class PLInterpreter {
    *               the method found. If there is no method in the
    *               inheritance tree, returns null.
    */
-  private Method getMethod(Class<?> cl, String mtName, Class[] clsarg) {
+  private Method getMethod(Class cl, String mtName, Class[] clsarg) {
 
     Method mt = null;
     int minDist = Integer.MAX_VALUE; // minimum distance.
@@ -687,7 +685,7 @@ class PLInterpreter {
      */
     Class[] clsargPrim = new Class[clsarg.length];
     for (int i = 0; i < clsarg.length ; i++) {
-	Class<?> cls = getPrimitiveClass(clsarg[i]);
+	Class cls = getPrimitiveClass(clsarg[i]);
 	if (cls != null) 
 	    clsargPrim[i] = cls;
 	else
@@ -707,7 +705,7 @@ class PLInterpreter {
     Method mts[] = cl.getMethods();
     for (int i = 0; i < mts.length; i++) 
       if (mts[i].getName().equals(mtName)) {
-	Class<?> clsfor[] = mts[i].getParameterTypes();
+	Class clsfor[] = mts[i].getParameterTypes();
 	if (clsfor.length == clsarg.length) {
 	  int distance = 0;
 	  boolean compatible = true;
@@ -753,8 +751,8 @@ class PLInterpreter {
    *               the constructor found. If there is no constructor in the
    *               inheritance tree, returns null.
    */
-  private Constructor<?> getConstructor(Class<?> cl, Class[] clsarg) {
-    Constructor<?> cn = null;
+  private Constructor getConstructor(Class cl, Class[] clsarg) {
+    Constructor cn = null;
     int minDist = Integer.MAX_VALUE; // minimum distance.
 
     /*
@@ -771,9 +769,9 @@ class PLInterpreter {
      * are chosen and determined their distance. The constructor with
      * minimum distance is selected.
      */
-    Constructor<?> cns[] = cl.getConstructors();
+    Constructor cns[] = cl.getConstructors();
     for (int i = 0; i < cns.length; i++) {
-      Class<?> clsfor[] = cns[i].getParameterTypes();
+      Class clsfor[] = cns[i].getParameterTypes();
       if (clsfor.length == clsarg.length) {
 	  int distance = 0;
 	  boolean compatible = true;
@@ -826,7 +824,7 @@ class PLInterpreter {
    *                      'distance' between the classes received as
    *                      argument.
    */
-  private int getDistance(Class<?> assignedTo, Class<?> assignedFrom) {
+  private int getDistance(Class assignedTo, Class assignedFrom) {
 
     int distance;
 
@@ -846,16 +844,16 @@ class PLInterpreter {
     if (assignedTo.equals(assignedFrom))
       return 0;
 
-    Class<?> newAssignedTo = null;
+    Class newAssignedTo = null;
     try {
-      Class<?> Int = Class.forName("java.lang.Integer");
-      Class<?> Bln = Class.forName("java.lang.Boolean");
-      Class<?> Chr = Class.forName("java.lang.Character");
-      Class<?> Byt = Class.forName("java.lang.Byte");
-      Class<?> Sht = Class.forName("java.lang.Short");
-      Class<?> Lng = Class.forName("java.lang.Long");
-      Class<?> Flt = Class.forName("java.lang.Float");
-      Class<?> Dbl = Class.forName("java.lang.Double");
+      Class Int = Class.forName("java.lang.Integer");
+      Class Bln = Class.forName("java.lang.Boolean");
+      Class Chr = Class.forName("java.lang.Character");
+      Class Byt = Class.forName("java.lang.Byte");
+      Class Sht = Class.forName("java.lang.Short");
+      Class Lng = Class.forName("java.lang.Long");
+      Class Flt = Class.forName("java.lang.Float");
+      Class Dbl = Class.forName("java.lang.Double");
 
       if (assignedTo.isPrimitive()) {
 	if (assignedTo.equals(Boolean.TYPE))
@@ -959,7 +957,7 @@ class PLInterpreter {
      * @return The argument value with the proper type, if there is any;
      *         <code>null</code> if there is no possible conversion.
      **/
-    private Object translateArg(Object arg, Class<?> type) {
+    private Object translateArg(Object arg, Class type) {
 
 	Object trArg = null;
 
@@ -1052,7 +1050,7 @@ class PLInterpreter {
      *           argument is a reflection of the primitive Java
      *           types; <code>null</code> otherwise.
      */
-  private Class<?> getPrimitiveClass(Class<?> cl) {
+  private Class getPrimitiveClass(Class cl) {
 
       try {
 	  if (cl.equals(Class.forName("java.lang.Byte")))

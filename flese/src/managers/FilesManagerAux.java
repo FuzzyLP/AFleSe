@@ -296,7 +296,7 @@ public class FilesManagerAux {
 									int resultCompilation =0;
 									try{
 										String FilePath = programFileInfo.getProgramFileFullPath();
-										Process compilationProcess = Runtime.getRuntime().exec( "sudo ciaoc " + FilePath );
+										Process compilationProcess = Runtime.getRuntime().exec(pathsMgmt.getCiaocPath() + " " + FilePath);
 										compilationProcess.waitFor();
 										resultCompilation = compilationProcess.exitValue();
 									}
