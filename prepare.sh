@@ -62,6 +62,7 @@ EOF
 chmod a+x "$wrapper_ciaoc_path"
 
 # Prepare config.properties
+mkdir -p "$_base"/flese/resources
 cat > "$_base"/flese/resources/config.properties <<EOF
 #Configuration file for Flese
 #Contains paths for used directories
