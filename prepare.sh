@@ -9,7 +9,7 @@ _base=$(e=$0;while test -L "$e";do d=$(dirname "$e");e=$(readlink "$e");\
       cd "$d";done;cd "$(dirname "$e")";pwd -P)
 
 # Check that Ciao is installed
-if ! which ciao 2>&1 > /dev/null; then
+if ! which ciao > /dev/null 2>&1; then
     cat <<EOF
 Please install Ciao (https://ciao-lang.org)
 EOF
@@ -29,7 +29,7 @@ ciao get ciao_java
 # TODO: Get Java dependencies too (for that, a conversion of the Java
 # Eclipse project to Maven would be great)
 
-function bundle_path() { # bundle
+bundle_path() { # bundle
     ciaosh -q <<EOF
 use_module(library(bundle/bundle_paths)).
 bundle_path(${1}, '.', _P), display(_P), nl.
