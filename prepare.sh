@@ -47,7 +47,6 @@ plserver_path="$(bundle_path ciao_java)"/lib/javall/plserver
 cat > "$wrapper_plserver_path" <<EOF
 #!/bin/sh
 export CIAOPATH=$_base/ciao
-export GLOBALSTKSIZE=262143 # TODO: needed due to a bug in Ciao's concurrency (JFMC)
 exec "$plserver_path" "\$@"
 EOF
 chmod a+x "$wrapper_plserver_path"
@@ -87,23 +86,11 @@ cat <<EOF
 
 Preparation is complete!
 
+Now you can open this project from Eclipse, start as a server, and
+open http://localhost:8080/flese from a web browser.
+
 Make sure that you also have installed:
  - Eclipse IDE for Java EE
  - TomCat 7 (download and install it)
 
-Now you can open this project from Eclipse, start as a server, and
-open http://localhost:8080/flese from a web browser.
-
-Notes for starting the server from Eclipse:
-
- - "Imports projects from Git"
- - "Existing local repository"
- - "Add..."
- - browse to this directory
- - select the .git file
- - "Next", "Import existing Eclipse project", "Next"
- - right-click on 
-   "Run On Server" (and select your downloaded TomCat)
-   Select TomCat 7 from the Apache/ menu
- 
 EOF
