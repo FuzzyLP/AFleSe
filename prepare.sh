@@ -36,6 +36,11 @@ bundle_path(${1}, '.', _P), display(_P), nl.
 EOF
 }
 
+# Copy Ciao Java files into flese/src/CiaoJava
+mkdir -p "$_base"/flese/src/CiaoJava
+cp "$(bundle_path ciao_java)"/lib/javall/CiaoJava/*.java "$_base"/flese/src/CiaoJava
+cp "$(bundle_path ciao_java)"/lib/javall/CiaoJava/*.html "$_base"/flese/src/CiaoJava
+
 # Create wrappers (such that Java always call Ciao with the right
 # environment variables)
 
